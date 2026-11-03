@@ -4,111 +4,111 @@
 
 ### Turn images into editable, layered HTML designs.
 
-**Inside ChatGPT. No Codex. No separate IDE.**
+**Supports Antigravity · Claude Code / MCP · ChatGPT · CLI**
 
 [![Fund the production](https://img.shields.io/badge/FUND%20THE%20PRODUCTION-Support%20PixelPerfect%20Studio-8B5CF6?style=for-the-badge)](https://mdzobaedislamshanto.supportkori.shop/)
+[![Release](https://img.shields.io/github/v/release/pikadexofc/pixelperfect-studio?style=for-the-badge&color=22C55E)](https://github.com/pikadexofc/pixelperfect-studio/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-[Installation guide](INSTALLATION.md) · [Releases](https://github.com/pikadexofc/pixelperfect-studio/releases) · [Report a problem](https://github.com/pikadexofc/pixelperfect-studio/issues)
+[Quick Install](#-1-click-quick-install) · [Platform Guides](INSTALLATION.md) · [Releases](https://github.com/pikadexofc/pixelperfect-studio/releases) · [Report Issue](https://github.com/pikadexofc/pixelperfect-studio/issues)
 
 </div>
 
 ---
 
+## ⚡ 1-Click Quick Install (Zero Friction)
+
+Install and configure PixelPerfect Studio automatically across your detected tools (Antigravity, Claude Desktop, CLI):
+
+#### Windows (PowerShell)
+```powershell
+irm https://raw.githubusercontent.com/pikadexofc/pixelperfect-studio/main/install.ps1 | iex
+```
+
+#### macOS / Linux (Terminal)
+```bash
+curl -fsSL https://raw.githubusercontent.com/pikadexofc/pixelperfect-studio/main/install.sh | bash
+```
+
+---
+
 ## What is PixelPerfect Studio?
 
-PixelPerfect Studio is a ChatGPT plugin that turns a supplied visual reference into a high-fidelity, fixed-size, editable HTML design.
+PixelPerfect Studio reconstructs visual references (posters, app icons, badges, UI mockups, banners) into high-fidelity, fixed-size, editable HTML designs.
 
-Upload a poster, graphic, slide, cover, or other visual. PixelPerfect Studio studies the image, separates its meaningful components, and rebuilds them as individually addressable HTML/CSS/SVG/image layers. The result is a standalone HTML design.
+- **Fixed-Size Artboard Invariant:** Never drifts into a responsive website. Canvas size matches the original reference exactly.
+- **Layer Addressability:** Every meaningful shape, icon, and text node carries a semantic `data-layer-id` attribute.
+- **Embedded Inspector HUD:** Every deliverable includes a zero-dependency floating HUD with an opacity slider and layer toggles for instant visual comparison.
+- **100% Offline Standalone:** Zero remote CDNs or broken external links.
 
-**This is a design reconstruction tool, not a website builder.** It does not turn your poster into a responsive website. It aims to preserve the original composition as a properly organized, editable design.
+---
 
-## One image in. Editable components out.
+## 🚀 Choose Your Platform
 
-A reconstruction can contain:
-- Editable HTML text where practical.
-- SVG or CSS for shapes, lines, geometry, and decorative details.
-- Individual embedded PNG assets for photographic or illustrated components.
-- Extracted source imagery and masks where appropriate.
-- A fixed artboard matching the original reference dimensions.
+### 1. Antigravity IDE & Antigravity 2.0
+Already included in the installer, or manually download `pixelperfect-studio-antigravity-1.1.0.zip` from [Releases](https://github.com/pikadexofc/pixelperfect-studio/releases) and extract to:
+- Windows: `%USERPROFILE%\.gemini\config\plugins\pixelperfect-studio`
+- macOS/Linux: `~/.gemini/config/plugins/pixelperfect-studio`
 
-If the exact font cannot be identified or used, the workflow can recover visible letterforms from the reference instead of silently substituting an unrelated typeface.
+### 2. Claude Code & Claude Desktop (MCP)
+Add PixelPerfect Studio to your `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "pixelperfect": {
+      "command": "python",
+      "args": ["-m", "pixelperfect_engine.pixelperfect_mcp"]
+    }
+  }
+}
+```
 
-## Work directly inside ChatGPT
+### 3. OpenAI ChatGPT / Custom GPT
+Download `pixelperfect-studio-chatgpt-1.1.0.zip` from [Releases](https://github.com/pikadexofc/pixelperfect-studio/releases) or paste the master prompt below in any conversation.
 
-The intended workflow happens in ChatGPT:
-1. Install the plugin.
-2. Open a ChatGPT conversation and select PixelPerfect Studio.
-3. Upload your reference image.
-4. Ask it to reconstruct the image as editable layered HTML.
-5. Review the reconstruction and download the final standalone HTML.
+### 4. Standalone Terminal CLI
+```bash
+# Run computer vision forensics
+pixelperfect analyze reference.png
 
-No Codex, separate IDE, command line, or local development setup is needed for the intended user workflow.
+# Run automated Playwright visual QA
+pixelperfect verify reference.png design.html
 
-**Account note:** ChatGPT plugin availability and individual capabilities depend on the account, plan, client, and current OpenAI product support. Confirm that your account displays an available installation option before following the guide. This repository does not promise universal plan compatibility.
+# Inject interactive HUD into your HTML
+pixelperfect inject-hud design.html -r reference.png
+```
 
-## Get the plugin
+---
 
-Download the latest stable plugin ZIP from [GitHub Releases](https://github.com/pikadexofc/pixelperfect-studio/releases).
+## 📋 Copy-and-Paste Master Prompt
 
-Download the release asset named:
-
-`PixelPerfect-Studio-Plugin-1.0.0.zip`
-
-Do not download GitHub's automatically generated **Source code (zip)** archive. That is not the installable plugin package.
-
-## Install in ChatGPT
-
-The beginner-friendly, step-by-step guide is here:
-
-**[Open the installation guide](INSTALLATION.md)**
-
-It explains how to download the correct ZIP, locate the plugin installation screen, upload the archive, enable the plugin in a conversation, and run your first reconstruction.
-
-## First-use prompt
-
-After installing the plugin, upload an image and paste:
+Upload your reference image and paste this single prompt:
 
 ```text
 Turn this image into editable layered HTML at its original size.
 
-Separate every meaningful visual component into its own independently addressable layer. Extract source visuals where possible and generate individual PNG assets when needed. Identify the exact fonts or recover the visible letterforms if the fonts are unavailable.
+Separate every meaningful visual component into its own independently addressable layer tagged with data-layer-id. Recover exact typography or extract visible letterforms. Preserve the original composition and dimensions.
 
-Preserve the original composition and dimensions. Render and inspect the result, correct visible defects, and deliver only the final verified standalone HTML.
+Inject the interactive Inspector HUD and deliver only the final verified standalone HTML file.
 ```
 
-## What you receive
+---
+
+## What You Receive
 
 The customer-facing deliverable is **one final standalone HTML file**.
 
-It should contain the fixed-size artboard, embedded visual assets, and independently addressable design components. It should open locally in a modern browser without relying on remote image or font URLs.
+- Double-click to open in any web browser.
+- Use the floating **Inspector HUD** in the corner to slide between your new HTML design and the original image reference.
+- Toggle individual layers on and off to verify structural alignment.
 
-Internal manifests, asset inventories, previews, project archives, and QA records are production materials. They are not additional customer deliverables.
+---
 
-## Quality and limitations
+## Distribution & Support
 
-PixelPerfect Studio uses a multi-stage process: visual analysis, layer planning, asset extraction or generation, composition, rendering, and visual review.
-
-Results depend on the source image and the tools available in the active ChatGPT session. Some complex imagery may remain a single image layer. Fonts may need to be approximated or letterforms extracted. A successful HTML render does not automatically mean a pixel-identical reconstruction.
-
-The plugin must disclose when a tool or verification step is unavailable. It must not claim that an asset was generated, a render was inspected, or a comparison passed unless that action actually happened.
-
-## Help and support
-
-- Installation or usage problem: [Open an issue](https://github.com/pikadexofc/pixelperfect-studio/issues/new)
-- Project updates and downloads: [Releases](https://github.com/pikadexofc/pixelperfect-studio/releases)
-- Support the ongoing work: [**Fund the production**](https://mdzobaedislamshanto.supportkori.shop/)
-
-A GitHub star is appreciated if the plugin is useful. It is never required to download or use the release.
-
-## Distribution and privacy
-
-This public repository is intentionally limited to:
-- Product overview and usage instructions.
-- Beginner-friendly installation guide.
-- Release download links and public release notes.
-- Support and issue-reporting links.
-
-The plugin's internal implementation, private Skills, development materials, and production assets are not published here.
+- Issues and Bug Reports: [GitHub Issues](https://github.com/pikadexofc/pixelperfect-studio/issues)
+- Downloads & Changelogs: [GitHub Releases](https://github.com/pikadexofc/pixelperfect-studio/releases)
+- Support Ongoing Development: [**Fund the Production**](https://mdzobaedislamshanto.supportkori.shop/)
 
 ---
 
